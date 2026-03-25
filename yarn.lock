@@ -1465,6 +1465,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"l2-interpreter@workspace:packages/l2-interpreter":
+  version: 0.0.0-use.local
+  resolution: "l2-interpreter@workspace:packages/l2-interpreter"
+  languageName: unknown
+  linkType: soft
+
 "levn@npm:^0.4.1":
   version: 0.4.1
   resolution: "levn@npm:0.4.1"

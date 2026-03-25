@@ -6,6 +6,9 @@
   "workspaces": [
     "packages/*"
   ],
+  "scripts": {
+    "interpreter:dev": "yarn workspace l2-interpreter dev"
+  },
   "devDependencies": {
     "eslint": "^10.1.0",
     "eslint-plugin-react": "^7.37.5",

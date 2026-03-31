@@ -1,6 +1,6 @@
 import { BCD } from "./bcd.ts";
 
-const n = new BCD(123456);
+const n = new BCD(BigInt(2**88));
 
 console.log(n.toBigint());
 console.log(n.toNumber());

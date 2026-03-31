@@ -7,7 +7,8 @@
     "packages/*"
   ],
   "scripts": {
-    "interpreter:dev": "yarn workspace l2-interpreter dev"
+    "interpreter:dev": "yarn workspace l2-interpreter dev",
+    "bcd:dev": "yarn workspace bcd dev"
   },
   "devDependencies": {
     "eslint": "^10.1.0",

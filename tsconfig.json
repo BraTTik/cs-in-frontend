@@ -6,7 +6,16 @@
     "strict": true,
     "skipLibCheck": true,
     "allowImportingTsExtensions": true,
-    "noEmit": true
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@utils": ["./packages/utils/src"]
+    }
   },
-  "include": ["eslint.config.mts", "packages/**/*.ts", "packages/**/*.tsx"]
+  "include": [
+    "eslint.config.mts",
+    "packages/**/*.ts",
+    "packages/**/*.tsx",
+    "src/**/*.ts"
+  ]
 }

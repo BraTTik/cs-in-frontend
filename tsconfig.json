@@ -10,12 +10,13 @@
     "baseUrl": ".",
     "paths": {
       "@utils": ["./packages/utils/src"]
-    }
+    },
+    "types": ["node"]
   },
   "include": [
     "eslint.config.mts",
     "packages/**/*.ts",
     "packages/**/*.tsx",
-    "src/**/*.ts"
+    "src/**/*.ts",
   ]
 }

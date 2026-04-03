@@ -12,6 +12,7 @@
     "cyclic:dev": "yarn workspace cyclic-shift dev"
   },
   "devDependencies": {
+    "@types/node": "^25.5.0",
     "eslint": "^10.1.0",
     "eslint-plugin-react": "^7.37.5",
     "globals": "^17.4.0",

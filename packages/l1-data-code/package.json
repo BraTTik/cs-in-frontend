@@ -1,0 +1,16 @@
+{
+  "name": "data-code",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "dev": "node --watch index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BraTTik/cs-in-frontend.git"
+  },
+  "private": true
+}

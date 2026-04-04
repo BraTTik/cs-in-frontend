@@ -9,15 +9,22 @@
   "scripts": {
     "interpreter:dev": "yarn workspace l2-interpreter dev",
     "bcd:dev": "yarn workspace bcd dev",
-    "cyclic:dev": "yarn workspace cyclic-shift dev"
+    "cyclic:dev": "yarn workspace cyclic-shift dev",
+    "data-code:dev": "yarn workspace data-code dev",
+    "data-code:test": "yarn workspace data-code test",
+    "data-code:test:watch": "yarn workspace data-code test:watch"
   },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.28.5",
+    "@types/jest": "^30.0.0",
     "@types/node": "^25.5.0",
     "eslint": "^10.1.0",
     "eslint-plugin-react": "^7.37.5",
     "globals": "^17.4.0",
+    "jest": "^30.3.0",
     "jiti": "^2.6.1",
     "prettier": "^3.8.1",
+    "ts-jest": "^29.4.9",
     "typescript": "^6.0.2",
     "typescript-eslint": "^8.57.2"
   }

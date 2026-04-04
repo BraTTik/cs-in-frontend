@@ -11,7 +11,7 @@
     "paths": {
       "@utils": ["./packages/utils/src"]
     },
-    "types": ["node"]
+    "types": ["node", "jest"]
   },
   "include": [
     "eslint.config.mts",

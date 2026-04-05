@@ -1,4 +1,4 @@
-import { getCharShift, getCharBits, charOpCode, UPPER_CASE_CHAR, OP_CODE_LENGTH} from "./dictionary.ts";
+import { getCharShift, getCharBits, charOpCode, UPPER_CASE_CHAR, OP_CODE_LENGTH, END_CHAR} from "./dictionary.ts";
 import { Byte } from "./byte.ts";
 import { Vector } from "./vector.ts";
 
@@ -10,7 +10,7 @@ export const encode = (str: string): Uint8Array => {
 
   const addBits = (bits: number, length: number) => {
     if (length === 0) return;
-    const [remainBits, remainBitsLength] = currentByte.add(bits, length);
+    const [remainBits, remainBitsLength] = currentByte.write(bits, length);
     if (remainBitsLength) {
       vector.push(currentByte.value);
       currentByte = new Byte();
@@ -24,10 +24,12 @@ export const encode = (str: string): Uint8Array => {
     if (isUpper) {
       addBits(charOpCode(UPPER_CASE_CHAR), OP_CODE_LENGTH);
     }
-    const [remainBits, remainBitsLength] = currentByte.add(code, length);
+    const [remainBits, remainBitsLength] = currentByte.write(code as number, length);
     addBits(remainBits, remainBitsLength);
   }
 
+  const { code, length} = getCharBits(END_CHAR);
+  addBits(code as number, length);
   if (!currentByte.isEmpty) vector.push(currentByte.value);
 
   return vector.array;

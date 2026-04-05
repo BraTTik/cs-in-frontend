@@ -26,7 +26,7 @@ export class Byte {
     return this.#length - this.#occupied;
   }
 
-  add(bits: number, length: number): [number, number] {
+  write(bits: number, length: number): [number, number] {
     const shift = this.vacant - length;
     this.#occupied = Math.min(8, this.#occupied + length);
 
@@ -44,6 +44,17 @@ export class Byte {
 
       return [0, 0];
     }
+  }
+
+  read(length: number): [number, number] {
+    const shift = (this.#length - length);
+    const missing = Math.abs(Math.max(0, length - this.#occupied));
+    const mask = createMask(length) << shift;
+    const value = (this.#value & mask) >>> (shift);
+    this.#value = (this.#value << length) & 255;
+    this.#occupied = Math.max(0, this.#occupied - length);
+
+    return [value, missing];
   }
 }
 

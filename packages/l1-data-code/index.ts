@@ -1,9 +1,6 @@
-import { toBinaryString } from "utils";
-import { appendOpCode, charOpCode, dictionary, } from "./dictionary.ts";
 import { encode } from './encode.ts';
+import { decode } from "./decode.ts";
 
-console.log(appendOpCode(1, 1, 2))
+const cyph = encode("Какая-то строка!");
 
-console.log(dictionary)
-
-console.log(encode("А"))
+console.log(decode(cyph))

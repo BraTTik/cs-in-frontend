@@ -1,5 +1,3 @@
-import { toBinaryString } from "utils";
-
 export class Byte {
   #length = 8;
   #occupied = 0;
@@ -26,6 +24,10 @@ export class Byte {
     return this.#length - this.#occupied;
   }
 
+  /**
+   * Записывает значение по длине битов, если не поместились в байт
+   * возвращает остаток значения и его длину в битах
+   *  */
   write(bits: number, length: number): [number, number] {
     const shift = this.vacant - length;
     this.#occupied = Math.min(8, this.#occupied + length);
@@ -46,6 +48,10 @@ export class Byte {
     }
   }
 
+  /**
+   * Возвращает значение по длине битов, если в байте только кусок значения,
+   * возвращает также сколько битов нужно прочесть в следующем байте
+   *  */
   read(length: number): [number, number] {
     const shift = (this.#length - length);
     const missing = Math.abs(Math.max(0, length - this.#occupied));

@@ -1,7 +1,7 @@
 import { Byte } from "./byte.ts";
-import { END_CHAR, UPPER_CASE_CHAR, UPPER_CASE_CODE, getCodeLength, OP_CODE_LENGTH, dictionary } from "./dictionary.ts";
-import { toBinaryString } from "utils";
+import { END_CHAR, UPPER_CASE_CODE, getCodeLength, OP_CODE_LENGTH, dictionary } from "./dictionary.ts";
 
+/** Класс-хелпер для чтения байтов по порядку */
 class Reader {
   private bytes: IterableIterator<Byte>;
   private current: Byte | undefined;
@@ -18,6 +18,7 @@ class Reader {
     if (rem !== 0) {
       this.current = this.bytes.next().value!;
       let [remVal] = this.current!.read(rem);
+      /** объединяем кусочки битов в значение */
       val |= remVal;
     }
 

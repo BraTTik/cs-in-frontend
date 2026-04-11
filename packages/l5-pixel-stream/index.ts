@@ -18,16 +18,12 @@ const imageTest = [
 
 type BenchResult = {
   size: string,
-  setPixel: string;
-  getPixel: string;
   rowMajor: string;
   columnMajor: string;
 }
 
 const template = (): BenchResult => ({
   size: "",
-  setPixel: "",
-  getPixel: "",
   rowMajor: "",
   columnMajor: "",
 })
@@ -47,10 +43,12 @@ const performanceTest = (calback: Function) => {
 
 const testStream = (stream: PixelStream, size: string, result: BenchResult) => {
   result.size = size;
-  result.setPixel = performanceTest(() => stream.setPixel( 12, 12, [1, 1, 1, 1]));
-  result.getPixel = performanceTest(() =>  stream.getPixel(12, 12));
-  result.rowMajor = performanceTest(() => stream.forEach(ROW_MAJOR, () => void 0));
-  result.columnMajor = performanceTest(() => stream.forEach(COLUMN_MAJOR, () => void 0));
+  result.rowMajor = performanceTest(() => stream.forEach(ROW_MAJOR, (_, x, y) => {
+    // stream.setPixel(x, y, [1, 1, 1, 1])
+  }));
+  result.columnMajor = performanceTest(() => stream.forEach(COLUMN_MAJOR, (_, x, y) => {
+    // stream.setPixel(x, y, [1, 1, 1, 1])
+  }));
 }
 
 for (let test = 0; test < imageTest.length; test++) {

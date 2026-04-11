@@ -2,17 +2,17 @@ import type { PixelStream, RGBA, TraverseMode } from "./types.ts";
 import { ROW_MAJOR } from "./types.ts"
 import { ImageData } from "./image-data.ts";
 
-export class FlatPixelStream implements PixelStream {
+export class TypedPixelStream implements PixelStream {
   #height: number;
   #width: number;
-  #data: number[];
+  #data: Uint8ClampedArray;
   #rgbaLength = 4;
   #callbackData: RGBA = new Array<number>(4).fill(0) as RGBA;
 
   constructor(imageData: ImageData) {
     this.#height = imageData.height;
     this.#width = imageData.width;
-    this.#data = Array.from(imageData.data);
+    this.#data = imageData.data.subarray();
   }
 
   forEach(mode: TraverseMode, callback: (rgba: RGBA, x: number, y: number) => void): void {
@@ -21,7 +21,7 @@ export class FlatPixelStream implements PixelStream {
 
   getPixel(x: number, y: number): RGBA {
     const startIndex = this.startIndex(x, y);
-    return this.#data.slice(startIndex, startIndex + this.#rgbaLength) as RGBA;
+    return this.#data.subarray(startIndex, startIndex + this.#rgbaLength) as unknown as RGBA;
   }
 
   setPixel(x: number, y: number, rgba: RGBA): RGBA {
@@ -38,15 +38,12 @@ export class FlatPixelStream implements PixelStream {
     return [p % this.#width, Math.floor(p / this.#width)]
   }
 
-  private calcIndex(x: number, y: number) {
-    return (y * this.#width + x) * this.#rgbaLength;
-  }
 
   private startIndex(x: number, y: number): number {
     if (x >= this.#width || x < 0 || y >= this.#height || y < 0) {
       throw new RangeError("invalid pixel index");
     }
-    return this.calcIndex(x, y);
+    return (y * this.#width + x) * this.#rgbaLength;
   }
 
   private rowMajor(callback: (rgba: RGBA, x: number, y: number) => void) {
@@ -60,16 +57,16 @@ export class FlatPixelStream implements PixelStream {
   private columnMajor(callback: (rgba: RGBA, x: number, y: number) => void) {
     for (let w = 0; w < this.#width; w++) {
       for (let h = 0; h < this.#height; h++) {
-        const index = this.calcIndex(w, h);
+        const index = (h * this.#width + w) * this.#rgbaLength;
         this.fillCallbackData(index);
         callback(this.#callbackData, w, h);
       }
     }
   }
 
-  private fillCallbackData(offset: number) {
-    for (let i = 0; i < this.#rgbaLength; i++) {
-      this.#callbackData[i] = this.#data[offset + i];
+  private fillCallbackData(start: number) {
+    for (let j = 0; j < this.#rgbaLength; j++) {
+      this.#callbackData[j] = this.#data[start + j];
     }
   }
 }

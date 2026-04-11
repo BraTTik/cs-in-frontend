@@ -1,5 +1,7 @@
 import { FlatPixelStream } from "./flat-pixel-stream.ts";
+import { ArraysPixelStream } from "./arrays-pixel-stream.ts"
 import { COLUMN_MAJOR, ROW_MAJOR } from "./types.ts";
+import type { PixelStream } from "./types.ts";
 import { ImageData } from "./image-data.ts";
 
 const imageData100 = new ImageData(100, 100);
@@ -13,39 +15,57 @@ const imageTest = [
 ]
 
 type BenchResult = {
-  setPixel: number;
-  getPixel: number;
-  rowMajor: number;
-  columnMajor: number;
+  size: string,
+  setPixel: string;
+  getPixel: string;
+  rowMajor: string;
+  columnMajor: string;
 }
 
 const template = (): BenchResult => ({
-  setPixel: 0,
-  getPixel: 0,
-  rowMajor: 0,
-  columnMajor: 0,
+  size: "",
+  setPixel: "",
+  getPixel: "",
+  rowMajor: "",
+  columnMajor: "",
 })
 
 const resultTemplate = (): BenchResult[] => [template(), template(), template()]
 
 const flatResult: BenchResult[] = resultTemplate();
+const arraysResult: BenchResult[] = resultTemplate();
 
 const performanceTest = (calback: Function) => {
-  const start = performance.now();
+  const start = Date.now();
   calback();
-  return performance.now() - start;
+  return (Date.now() - start).toFixed(3) + "ms";
+}
+
+const testStream = (stream: PixelStream, size: string, result: BenchResult) => {
+  result.size = size;
+  result.setPixel = performanceTest(() => stream.setPixel( 12, 12, [1, 1, 1, 1]));
+  result.getPixel = performanceTest(() => stream.getPixel(12, 12));
+  result.rowMajor = performanceTest(() => stream.forEach(ROW_MAJOR, () => void 0));
+  result.columnMajor = performanceTest(() => stream.forEach(COLUMN_MAJOR, () => void 0));
 }
 
 for (let test = 0; test < imageTest.length; test++) {
   const image = imageTest[test];
   const flatPixelStream = new FlatPixelStream(image);
+  const arrayPixelStream = new ArraysPixelStream(image);
+
+  const size = `${image.width}x${image.height}`;
 
   const flat = flatResult[test];
-  flat.setPixel = performanceTest(() => flatPixelStream.setPixel( 12, 12, [1, 1, 1, 1]));
-  flat.getPixel = performanceTest(() => flatPixelStream.getPixel(12, 12));
-  flat.rowMajor = performanceTest(() => flatPixelStream.forEach(ROW_MAJOR, () => void 0));
-  flat.columnMajor = performanceTest(() => flatPixelStream.forEach(COLUMN_MAJOR, () => void 0));
+  testStream(flatPixelStream, size, flat);
+
+  const array = arraysResult[test];
+  testStream(arrayPixelStream, size, array);
+
 }
 
 console.log("======= FlatPixelStream =======")
 console.table(flatResult)
+
+console.log("======= ArrayPixelStream =======");
+console.table(arraysResult);

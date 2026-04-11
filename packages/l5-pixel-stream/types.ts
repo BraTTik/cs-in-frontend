@@ -12,3 +12,4 @@ export interface PixelStream {
   setPixel(x: number, y: number, rgba: RGBA): RGBA;
   forEach(mode: TraverseMode, callback: (rgba: RGBA, x: number, y: number) => void): void
 }
+5

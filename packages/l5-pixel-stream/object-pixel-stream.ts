@@ -2,10 +2,17 @@ import type { PixelStream, RGBA, TraverseMode } from "./types.ts";
 import { ROW_MAJOR } from "./types.ts";
 import { ImageData } from "./image-data.ts";
 
-export class ArraysPixelStream implements PixelStream {
+type RGBAObj = {
+  r: number,
+  g: number,
+  b: number,
+  a: number
+}
+
+export class ObjectPixelStream implements PixelStream {
   private width: number;
   private height: number;
-  private data: RGBA[]
+  private data: RGBAObj[];
 
   constructor(data: ImageData) {
     this.width = data.width;
@@ -13,8 +20,7 @@ export class ArraysPixelStream implements PixelStream {
     this.data = new Array(data.data.length / 4);
 
     for (let i = 0; i < data.data.length; i += 4) {
-      const pixel = data.data.slice(i, i + 4);
-      this.data[i / 4] = Array.from(pixel) as RGBA;
+      this.data[i / 4] = this.toObj(Array.from(data.data.slice(i, i + 4)) as RGBA)
     }
   }
 
@@ -24,11 +30,11 @@ export class ArraysPixelStream implements PixelStream {
 
   getPixel(x: number, y: number): RGBA {
     this.checkRange(x, y);
-    return this.data[this.toIndex(x, y)];
+    return this.toArr(this.data[this.toIndex(x, y)]);
   }
 
   setPixel(x: number, y: number, rgba: RGBA): RGBA {
-    this.data[this.toIndex(x, y)] = rgba;
+    this.data[this.toIndex(x, y)] = this.toObj(rgba);
     return rgba;
   }
 
@@ -59,5 +65,15 @@ export class ArraysPixelStream implements PixelStream {
         callback(this.getPixel(w, h), w, h);
       }
     }
+  }
+
+  private toObj(rgba: RGBA): RGBAObj {
+    const [r, g, b, a] = rgba;
+    return { r, g, b, a };
+  }
+
+  private toArr(rgba: RGBAObj): RGBA {
+    const {r, g, b, a} = rgba;
+    return [r, g, b, a];
   }
 }

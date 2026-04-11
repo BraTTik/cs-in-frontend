@@ -1,5 +1,6 @@
 import { FlatPixelStream } from "./flat-pixel-stream.ts";
-import { ArraysPixelStream } from "./arrays-pixel-stream.ts"
+import { ArraysPixelStream } from "./arrays-pixel-stream.ts";
+import { ObjectPixelStream } from "./object-pixel-stream.ts";
 import { COLUMN_MAJOR, ROW_MAJOR } from "./types.ts";
 import type { PixelStream } from "./types.ts";
 import { ImageData } from "./image-data.ts";
@@ -34,6 +35,7 @@ const resultTemplate = (): BenchResult[] => [template(), template(), template()]
 
 const flatResult: BenchResult[] = resultTemplate();
 const arraysResult: BenchResult[] = resultTemplate();
+const objResult: BenchResult[] = resultTemplate();
 
 const performanceTest = (calback: Function) => {
   const start = Date.now();
@@ -44,7 +46,7 @@ const performanceTest = (calback: Function) => {
 const testStream = (stream: PixelStream, size: string, result: BenchResult) => {
   result.size = size;
   result.setPixel = performanceTest(() => stream.setPixel( 12, 12, [1, 1, 1, 1]));
-  result.getPixel = performanceTest(() => stream.getPixel(12, 12));
+  result.getPixel = performanceTest(() =>  stream.getPixel(12, 12));
   result.rowMajor = performanceTest(() => stream.forEach(ROW_MAJOR, () => void 0));
   result.columnMajor = performanceTest(() => stream.forEach(COLUMN_MAJOR, () => void 0));
 }
@@ -53,6 +55,7 @@ for (let test = 0; test < imageTest.length; test++) {
   const image = imageTest[test];
   const flatPixelStream = new FlatPixelStream(image);
   const arrayPixelStream = new ArraysPixelStream(image);
+  const objectPixelStream = new ObjectPixelStream(image);
 
   const size = `${image.width}x${image.height}`;
 
@@ -62,6 +65,8 @@ for (let test = 0; test < imageTest.length; test++) {
   const array = arraysResult[test];
   testStream(arrayPixelStream, size, array);
 
+  const obj = objResult[test];
+  testStream(objectPixelStream, size, obj);
 }
 
 console.log("======= FlatPixelStream =======")
@@ -69,3 +74,6 @@ console.table(flatResult)
 
 console.log("======= ArrayPixelStream =======");
 console.table(arraysResult);
+
+console.log("======= ObjectPixelStream =======")
+console.table(objResult);

@@ -44,10 +44,10 @@ const performanceTest = (calback: Function) => {
 const testStream = (stream: PixelStream, size: string, result: BenchResult) => {
   result.size = size;
   result.rowMajor = performanceTest(() => stream.forEach(ROW_MAJOR, (_, x, y) => {
-    // stream.setPixel(x, y, [1, 1, 1, 1])
+    stream.setPixel(x, y, [1, 1, 1, 1])
   }));
   result.columnMajor = performanceTest(() => stream.forEach(COLUMN_MAJOR, (_, x, y) => {
-    // stream.setPixel(x, y, [1, 1, 1, 1])
+    stream.setPixel(x, y, [1, 1, 1, 1])
   }));
 }
 
@@ -72,7 +72,7 @@ for (let test = 0; test < imageTest.length; test++) {
   const typed = typedResult[test];
   testStream(typedPixelStream, size, typed);
 }
-
+console.log("Запись значения")
 console.log("======= FlatPixelStream =======")
 console.table(flatResult)
 

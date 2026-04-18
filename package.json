@@ -11,6 +11,7 @@
     "bcd:dev": "yarn workspace bcd dev",
     "cyclic:dev": "yarn workspace cyclic-shift dev",
     "pixel-stream:dev": "yarn workspace pixel-stream dev",
+    "array-test:dev": "yarn workspace array-test dev",
     "data-code:dev": "yarn workspace data-code dev",
     "data-code:test": "yarn workspace data-code test",
     "data-code:test:watch": "yarn workspace data-code test:watch"

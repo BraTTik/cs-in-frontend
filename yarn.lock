@@ -1792,6 +1792,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"array-test@workspace:packages/ l6-array-test":
+  version: 0.0.0-use.local
+  resolution: "array-test@workspace:packages/ l6-array-test"
+  languageName: unknown
+  linkType: soft
+
 "array.prototype.findlast@npm:^1.2.5":
   version: 1.2.5
   resolution: "array.prototype.findlast@npm:1.2.5"

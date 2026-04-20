@@ -1,4 +1,4 @@
-import { Array } from './types.ts';
+import type { Array } from "./types.ts";
 import { minmax } from "utils";
 
 
@@ -11,6 +11,9 @@ export class CircularBuffer<T> implements Array<T> {
   #safeLength: (length: number) => number;
 
   constructor(capacity: number) {
+    if (isNaN(capacity) || !isFinite(capacity)) {
+      throw new TypeError("Invalid input length");
+    }
     this.#arr = Array.from({ length: capacity }, () => null);
     this.#zero = 0;
     this.#length = 0;
@@ -26,6 +29,9 @@ export class CircularBuffer<T> implements Array<T> {
   }
 
   at(_index: number): T | null {
+    if (_index < 0 || _index >= this.#length) {
+      return null;
+    }
     const index = this.getIndex(_index)
     return this.#arr[index] ?? null;
   }

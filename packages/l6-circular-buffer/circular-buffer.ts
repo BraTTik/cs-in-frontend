@@ -4,6 +4,7 @@ import { minmax } from "utils";
 
 export class CircularBuffer<T> implements Array<T> {
   #arr: (T | null)[];
+  /** начало среза виртуального массива в текущем массиве */
   #zero: number;
   #length: number;
 
@@ -14,10 +15,6 @@ export class CircularBuffer<T> implements Array<T> {
     this.#zero = 0;
     this.#length = 0;
     this.#safeLength = minmax(0, capacity);
-  }
-
-  get _arr() {
-    return this.#arr;
   }
 
   get capacity(): number {

@@ -38,7 +38,6 @@ describe('CircularBuffer', () => {
       expect(b.at(0)).toBe('a');
       expect(b.at(1)).toBe('b');
       expect(b.push('c')).toBe(2);
-      console.log(b._arr)
       expect(b.length).toBe(2);
       expect(b.at(0)).toBe('b');
       expect(b.at(1)).toBe('c');
@@ -90,7 +89,6 @@ describe('CircularBuffer', () => {
       const b = new CircularBuffer<string>(3);
       b.push('a');
       expect(b.unshift('z')).toBe(2);
-      console.log(b._arr)
       expect(b.at(0)).toBe('z');
       expect(b.at(1)).toBe('a');
     });

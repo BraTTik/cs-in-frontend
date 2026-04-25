@@ -1,31 +1,24 @@
-import { Buffer } from "./types.ts";
+import type { Buffer } from "./types.ts";
 import { readString } from "./string-view.ts";
+import { DynamicBuffer } from "./dynamic-buffer.ts";
 
 export class AVersion implements Buffer {
-   #buffer: ArrayBuffer;
-   #maxByteLength: number;
+   #buffer: DynamicBuffer;
    #encoder = new TextEncoder();
 
    #lengthOffset = Uint32Array.BYTES_PER_ELEMENT;
-   #dataView: DataView;
 
    get __buffer() {
-     return this.#buffer;
+     return this.#buffer.buffer;
    }
 
    get length(): number {
-     return this.#dataView.getInt32(0, true);
-   }
-
-   get maxByteLength(): number {
-     return this.#maxByteLength;
+     return this.#buffer.getUint32(0);
    }
 
   constructor(values: string[]) {
-    this.#buffer = new ArrayBuffer(1024);
-    this.#maxByteLength = 1024;
-    this.#dataView = new DataView(this.#buffer);
-    this.#dataView.setInt32(0, values.length, true)
+    this.#buffer = new DynamicBuffer(8, true);
+    this.#buffer.setInt32(0, values.length);
     let offset = this.#lengthOffset;
 
     values.forEach((str, index) => {
@@ -41,7 +34,7 @@ export class AVersion implements Buffer {
      if (offset < 0) return undefined;
      const [stringLength, readOffset] = this.#readStringLength(offset);
 
-     return readString(this.#buffer, readOffset, stringLength);
+     return readString(this.#buffer.buffer, readOffset, stringLength);
   }
 
   #getOffset(_index: number): number {
@@ -69,18 +62,18 @@ export class AVersion implements Buffer {
   }
 
   #write(bytes: Uint8Array, offset = 0) {
-     new Uint8Array(this.#buffer, offset).set(bytes);
+     this.#buffer.write(offset, bytes.buffer)
   }
 
   #readStringLength(offset: number): [lenght: number, offset: number] {
      offset = this.#align(offset, Uint32Array.BYTES_PER_ELEMENT);
-     const length = this.#dataView.getUint32(offset, true);
+     const length = this.#buffer.getUint32(offset);
      return [length, offset + Uint32Array.BYTES_PER_ELEMENT];
   }
 
   #writeStringLength(value: number, offset: number) {
      offset = this.#align(offset, Uint32Array.BYTES_PER_ELEMENT);
-     this.#dataView.setInt32(offset, value, true);
+     this.#buffer.setInt32(offset, value, true);
      return offset + this.#lengthOffset;
   }
 

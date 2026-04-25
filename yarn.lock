@@ -5402,6 +5402,14 @@ __metadata:
   languageName: node
   linkType: hard
 
+"string-binary@workspace:packages/l7-string-binary":
+  version: 0.0.0-use.local
+  resolution: "string-binary@workspace:packages/l7-string-binary"
+  dependencies:
+    utils: "workspace:*"
+  languageName: unknown
+  linkType: soft
+
 "string-length@npm:^4.0.2":
   version: 4.0.2
   resolution: "string-length@npm:4.0.2"

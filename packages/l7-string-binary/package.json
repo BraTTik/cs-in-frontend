@@ -1,0 +1,20 @@
+{
+  "name": "string-binary",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.ts",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "dev": "node --watch index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BraTTik/cs-in-frontend.git"
+  },
+  "private": true,
+  "dependencies": {
+    "utils": "workspace:*"
+  }
+}

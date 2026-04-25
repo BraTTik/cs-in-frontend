@@ -16,7 +16,9 @@
     "data-code:test": "yarn workspace data-code test",
     "data-code:test:watch": "yarn workspace data-code test:watch",
     "circular-buffer:test:watch": "yarn workspace circular-buffer test:watch",
-    "circular-buffer:dev": "yarn workspace circular-buffer dev"
+    "circular-buffer:dev": "yarn workspace circular-buffer dev",
+    "string-binary:dev": "yarn workspace string-binary dev",
+    "string-binary:test": "yarn workspace string-binary test:watch"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.28.5",

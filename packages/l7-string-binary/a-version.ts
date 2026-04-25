@@ -37,6 +37,15 @@ export class AVersion implements Buffer {
      return readString(this.#buffer.buffer, readOffset, stringLength);
   }
 
+  forEach(callback: (value: string, index: number) => void) {
+    let index = 0;
+
+    for (let item of this) {
+      callback(item, index);
+      index += 1;
+    }
+  }
+
   #getOffset(_index: number): number {
      const index = this.#normalizeIndex(_index);
      let current = 0;
@@ -84,6 +93,20 @@ export class AVersion implements Buffer {
   #align(offset: number, bytesPerElement: number): number {
      return (offset + bytesPerElement - 1) & ~(bytesPerElement - 1);
   }
+
+  *[Symbol.iterator]() {
+     let i = 0;
+     let offset = this.#lengthOffset;
+
+    while (i < this.length) {
+      const [stringLength, readOffset] = this.#readStringLength(offset);
+      const str = readString(this.#buffer.buffer, readOffset, stringLength);
+      offset = readOffset + stringLength;
+      i++;
+
+      yield str;
+    }
+  }
 }
 
 export const encodeStrings = (strings: string[]): Buffer => {
@@ -92,9 +115,9 @@ export const encodeStrings = (strings: string[]): Buffer => {
 
 export const decodeStrings = (buffer: Buffer): string[] => {
   const str = new Array(buffer.length);
-  for (let i = 0; i < buffer.length; i++) {
-    str[i] = buffer.at(i);
-  }
+  buffer.forEach((val, index) => {
+    str[index] = val;
+  });
 
   return str;
 }

@@ -15,8 +15,6 @@ export class DynamicBuffer implements DataView {
 
   write(offset: number, bytes: ArrayBufferLike) {
     this.#checkSize(offset, bytes.byteLength);
-    console.trace();
-    console.log(bytes);
     new Uint8Array(this.#buffer, offset).set(new Uint8Array(bytes));
   }
 

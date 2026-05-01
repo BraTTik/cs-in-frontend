@@ -1,5 +1,5 @@
 import { DynamicBuffer } from "./dynamic-buffer.ts";
-import type { Buffer } from "./types.ts";
+import type { Buffer, SetBuffer } from "./types.ts";
 import { readString } from "./string-view.ts";
 
 type Cursor = [length: number, cursor: number];
@@ -18,7 +18,7 @@ const writeStringCursor = (cursorBuffer: DynamicBuffer, offset: number, cursor: 
   cursorBuffer.setUint32(offset + Uint32Array.BYTES_PER_ELEMENT, cursorValue);
 }
 
-export class BVersion implements Buffer {
+export class BVersion implements SetBuffer {
   #buffer: DynamicBuffer;
   #cursorBuffer: DynamicBuffer;
   #bufferOffset: number
@@ -47,6 +47,16 @@ export class BVersion implements Buffer {
     return this.#buffer.buffer;
   }
 
+  set(_index: number, value: string) {
+    const index = this.#normalizeIndex(_index);
+    if (index >= this.length || isNaN(index) || !isFinite(index)) return;
+    const cursor = this.#writeString(value);
+    const offset = CURSOR_LENGTH * index + this.#lengthOffset;
+    writeStringCursor(this.#cursorBuffer, offset, cursor);
+
+    this.#defragment();
+  }
+
   at(_index: number): string | undefined {
     const index = this.#normalizeIndex(_index);
     if (index >= this.length || isNaN(index) || !isFinite(index)) return undefined;
@@ -71,7 +81,7 @@ export class BVersion implements Buffer {
     const cursor = this.#bufferOffset;
     const data = this.#encoder.encode(value);
     this.#buffer.write(cursor, data.buffer);
-    this.#bufferOffset += data.length;
+    this.#bufferOffset += data.byteLength;
 
     return [data.length, cursor];
   }
@@ -88,6 +98,21 @@ export class BVersion implements Buffer {
 
   #normalizeIndex(index: number): number {
     return ((index % this.length) + this.length) % this.length;
+  }
+
+  #defragment() {
+    const newBuffer = new DynamicBuffer(this.#buffer.byteLength);
+    const bufferView = new Uint8Array(newBuffer.buffer);
+    let bufferOffset = 0;
+    const length = this.length;
+    for (let i = 0; i < length; i++) {
+      const [length, cursor] = this.#getCursor(i);
+      bufferView.set(new Uint8Array(this.#buffer.buffer.slice(cursor, cursor + length)), bufferOffset);
+      writeStringCursor(this.#cursorBuffer, CURSOR_LENGTH * i + this.#lengthOffset, [length, bufferOffset]);
+      bufferOffset = bufferOffset + length;
+    }
+    this.#buffer = newBuffer;
+    this.#bufferOffset = bufferOffset;
   }
 
   *[Symbol.iterator]() {

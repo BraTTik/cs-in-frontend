@@ -1,5 +1,7 @@
-import { encodeStrings, decodeStrings } from "./a-version.ts";
+import { encodeStrings, decodeStrings } from "./b-version.ts";
 
-const encoded = encodeStrings(["Hello", "world", "!", "", "мир"]);
+const encoded = encodeStrings(["Hello", "world", "!"]);
 
-console.log(decodeStrings(encoded))
+encoded.set(1, "мир");
+
+console.log(encoded.at(1))

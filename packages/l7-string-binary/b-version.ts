@@ -97,17 +97,22 @@ export class BVersion implements SetBuffer {
   }
 
   #normalizeIndex(index: number): number {
-    return ((index % this.length) + this.length) % this.length;
+    if (index < 0) {
+      return ((index % this.length) + this.length) % this.length
+    }
+
+    return index;
   }
 
   #defragment() {
     const newBuffer = new DynamicBuffer(this.#buffer.byteLength);
     const bufferView = new Uint8Array(newBuffer.buffer);
+    const oldView = new Uint8Array(this.#buffer.buffer);
     let bufferOffset = 0;
     const length = this.length;
     for (let i = 0; i < length; i++) {
       const [length, cursor] = this.#getCursor(i);
-      bufferView.set(new Uint8Array(this.#buffer.buffer.slice(cursor, cursor + length)), bufferOffset);
+      bufferView.set(oldView.subarray(cursor, cursor + length), bufferOffset);
       writeStringCursor(this.#cursorBuffer, CURSOR_LENGTH * i + this.#lengthOffset, [length, bufferOffset]);
       bufferOffset = bufferOffset + length;
     }

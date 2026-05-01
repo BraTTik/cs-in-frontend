@@ -1,11 +1,11 @@
-import { encodeStrings, decodeStrings } from "../a-version.ts";
+import { encodeStrings, decodeStrings } from "../b-version.ts";
 
 const tests = ["Hello", "world", "!", "", "мир"];
 
 const HELLO = "Hello";
 const testEncoded = new TextEncoder().encode(HELLO);
 
-describe("tests for A-version", () => {
+describe("tests for B-version", () => {
   it ("encoded string", () => {
     const test = encodeStrings([HELLO]);
     expect(test.__buffer.slice(Uint32Array.BYTES_PER_ELEMENT)).toEqual(testEncoded.buffer);

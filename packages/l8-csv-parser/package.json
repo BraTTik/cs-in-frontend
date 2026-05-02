@@ -17,6 +17,7 @@
   },
   "private": true,
   "dependencies": {
+    "msgpackr": "^1.11.10",
     "utils": "workspace:*"
   }
 }

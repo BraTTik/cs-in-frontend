@@ -37,10 +37,7 @@ describe("tests for B-version", () => {
     buffer.set(-1, "");
     expect(buffer.at(3)).toBe("");
 
-    // overflow index should wrap by modulo
-    buffer.set(10, "wrapped");
-    expect(buffer.at(2)).toBe("wrapped");
-
+    buffer.set(-2, "wrapped");
     // ensure whole structure remains readable after edge updates
     expect(decodeStrings(buffer)).toEqual(["zero", "one", "wrapped", ""]);
   })

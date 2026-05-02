@@ -18,7 +18,10 @@
     "circular-buffer:test:watch": "yarn workspace circular-buffer test:watch",
     "circular-buffer:dev": "yarn workspace circular-buffer dev",
     "string-binary:dev": "yarn workspace string-binary dev",
-    "string-binary:test": "yarn workspace string-binary test:watch"
+    "string-binary:test": "yarn workspace string-binary test:watch",
+    "csv:generate": "yarn workspace parser generate-csv",
+    "json:generate": "yarn workspace parser generate-json",
+    "parser:dev": "yarn workspace parser dev"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.28.5",

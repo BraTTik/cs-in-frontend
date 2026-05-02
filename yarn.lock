@@ -6051,6 +6051,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"struct@workspace:packages/l9-struct":
+  version: 0.0.0-use.local
+  resolution: "struct@workspace:packages/l9-struct"
+  languageName: unknown
+  linkType: soft
+
 "supports-color@npm:^7.1.0":
   version: 7.2.0
   resolution: "supports-color@npm:7.2.0"

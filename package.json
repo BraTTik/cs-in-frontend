@@ -21,7 +21,9 @@
     "string-binary:test": "yarn workspace string-binary test:watch",
     "csv:generate": "yarn workspace parser generate-csv",
     "json:generate": "yarn workspace parser generate-json",
-    "parser:dev": "yarn workspace parser dev"
+    "parser:dev": "yarn workspace parser dev",
+    "struct:dev": "yarn workspace struct dev",
+    "struct:test": "yarn workspace struct test"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.28.5",

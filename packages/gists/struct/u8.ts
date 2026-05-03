@@ -1,6 +1,6 @@
-import { Struct } from "./types.ts";
+import { Typed } from "./types.ts";
 
-export class U8 extends Struct<number> {
+export class U8 extends Typed<number> {
   private view: Uint8Array | null = null;
 
   get(): number {

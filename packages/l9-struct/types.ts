@@ -1,37 +1,18 @@
-export abstract class Struct<TData> {
-  #byteLength: number;
-  #alignment: number;
-  #buffer: ArrayBuffer | null = null;
-  #offset: number = 0;
+export interface RGBAWindow {
+  get red(): number;
+  get green(): number;
+  get blue(): number;
+  get alpha(): number;
+  set red(value);
+  set green(value);
+  set blue(value);
+  set alpha(value);
 
-  abstract get(): TData;
-  abstract set(value: TData): void;
+  get hex(): string;
+  set hex(value: string);
 
-  get byteLength() {
-    return this.#byteLength;
-  }
+  setBuffer(buffer: ArrayBufferLike): void;
+  setOffset(offset: number): void;
 
-  get alignment() {
-    return this.#alignment;
-  }
-
-  get offset() {
-    return this.#offset;
-  }
-
-  get buffer() {
-    if (this.#buffer == null) {
-      throw new Error(`${this.constructor.name} is not initialized`)
-    }
-
-    return this.#buffer;
-  }
-
-  protected constructor(byteLength: number, alingment: number) {
-    this.#byteLength = byteLength;
-    this.#alignment = alingment
-  }
-
-  abstract init(buffer: ArrayBuffer, offset: number, data: TData): this;
-  abstract from(buffer: ArrayBuffer, offset: number): this;
+  array(): Uint8ClampedArray;
 }

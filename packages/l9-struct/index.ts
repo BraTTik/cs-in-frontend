@@ -1,1 +1,3 @@
-console.log("struct")
+export { Typed } from "./types.ts";
+import { Tuple } from "./tuple.ts"
+

@@ -7,11 +7,18 @@
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
-    "dev": "node --watch index.ts"
+    "dev": "vite"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/BraTTik/cs-in-frontend.git"
   },
-  "private": true
+  "private": true,
+  "dependencies": {
+    "vite": "^8.0.10"
+  },
+  "devDependencies": {
+    "jest-environment-jsdom": "^30.3.0",
+    "jsdom": "^29.1.1"
+  }
 }

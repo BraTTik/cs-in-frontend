@@ -1,20 +1,22 @@
 import { convertHex, toHex } from "./utils.ts";
 import type { RGBAWindow } from "./types.ts"
 
-enum Color {
-  RED,
-  GREEN,
-  BLUE,
-  ALPHA
+const Color = {
+  RED: 0,
+  GREEN: 1,
+  BLUE: 2,
+  ALPHA: 3
 }
 
 export class RGBA implements RGBAWindow{
   static byteLength: 4 = 4;
   #buffer: ArrayBufferLike | null = null;
   #offset: number = 0;
+  #view: Uint8ClampedArray | null = null;
 
-  setBuffer(buffer: ArrayBufferLike | null): void {
+  setBuffer(buffer: ArrayBufferLike): void {
     this.#buffer = buffer;
+    this.#view = new Uint8ClampedArray(buffer);
   }
 
   get byteLength() {
@@ -80,7 +82,7 @@ export class RGBA implements RGBAWindow{
     if (!this.#buffer) {
       throw new Error("Buffer is not set")
     }
-    return new Uint8Array(this.#buffer, offset + this.#offset, 1)[0];
+    return this.#view![offset + this.#offset];
   }
 
   private setValue(offset: number, value: number): void {
@@ -88,6 +90,6 @@ export class RGBA implements RGBAWindow{
       throw new Error("Buffer is not set")
     }
 
-    new Uint8Array(this.#buffer, offset + this.#offset, 1)[0] = value;
+    this.#view![offset + this.#offset] = value;
   }
 }

@@ -3,9 +3,17 @@ export class ImageData {
   public width: number;
   public height: number;
 
-  constructor(width: number, height: number) {
-    this.width = width;
-    this.height = height;
-    this.data = new Uint8ClampedArray(width * height * 4);
+  constructor(data: Uint8ClampedArray, width: number, height: number)
+  constructor(width: number, height: number)
+  constructor(data: Uint8ClampedArray | number, width: number, height?: number) {
+    if (typeof data === "object") {
+      this.data = data;
+      this.width = width;
+      this.height = height;
+    } else {
+      this.width = data;
+      this.height = width;
+      this.data = new Uint8ClampedArray(this.width * this.height * 4);
+    }
   }
 }

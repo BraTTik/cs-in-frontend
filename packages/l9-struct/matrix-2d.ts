@@ -1,5 +1,5 @@
-import { RGBAWindow } from "./types.ts";
-import ArrayLike = jasmine.ArrayLike;
+import { type RGBAWindow } from "./types.ts";
+import { convertHex } from "./utils.ts";
 
 type RGBACtor = RGBAWindow | (new () => RGBAWindow);
 
@@ -8,7 +8,7 @@ const resolveWindow = (ctor: RGBACtor): RGBAWindow => {
     return new ctor();
   }
   return ctor;
-}
+};
 
 type ColorValue = ArrayLike<number> | string;
 
@@ -49,10 +49,10 @@ export class Matrix2D implements Matrix {
   }
 
   view(row: number, column: number) {
-     const offset = this.#getOffset(row, column);
-     this.#window.setOffset(offset);
+    const offset = this.#getOffset(row, column);
+    this.#window.setOffset(offset);
 
-     return this.#window;
+    return this.#window;
   }
 
   get(row: number, col: number): Uint8ClampedArray {
@@ -76,9 +76,18 @@ export class Matrix2D implements Matrix {
   }
 
   fill(value: ColorValue) {
+    if (typeof value === "string") {
+      value = convertHex(value);
+    }
+
     for (let h = 0; h < this.#height; h++) {
-      for (let v = 0; v < this.#height; v++) {
-        this.set(h, v, value);
+      for (let v = 0; v < this.#width; v++) {
+        const offset = this.#calcOffset(h, v);
+        this.#window.setOffset(offset);
+        this.#window.red = value[0] ?? 0;
+        this.#window.green = value[1] ?? 0;
+        this.#window.blue = value[2] ?? 0;
+        this.#window.alpha = value[3] ?? 0;
       }
     }
   }
@@ -86,21 +95,25 @@ export class Matrix2D implements Matrix {
   constructor(width: number, height: number, rgba: RGBACtor, data?: Uint8ClampedArray) {
     this.#width = width;
     this.#height = height;
-    this.#data = data ?? new Uint8ClampedArray(width * height);
+    this.#data = data ?? new Uint8ClampedArray(width * height * 4);
     this.#window = resolveWindow(rgba);
     this.#length = width * height;
     this.#window.setBuffer(this.#data.buffer);
+  }
+
+  #calcOffset(row: number, column: number) {
+    return (row * this.#width + column) * 4;
   }
 
   #getOffset(row: number, column: number) {
     row = this.#normalizeIndex(row, this.height);
     column = this.#normalizeIndex(column, this.width);
 
-    return row * this.width + column;
+    return this.#calcOffset(row, column);
   }
 
   #normalizeIndex(_index: number, length: number) {
-    let index = _index
+    let index = _index;
     if (index < 0) {
       index = ((_index % length) + length) % length;
     }

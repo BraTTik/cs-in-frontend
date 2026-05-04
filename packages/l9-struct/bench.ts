@@ -120,8 +120,7 @@ const arraysResult = await serializeRun("Array of Arrays", ARRAYS_FILE, saveArra
 
 const logResults = (title: string, mutate: MutateResult, serialize: SaveReadResult) => {
   console.log(`==== ${title} ====`)
-  console.log(mutate);
-  console.log(serialize);
+  console.table({...mutate, ...serialize});
   console.log("=======");
   console.log();
 }

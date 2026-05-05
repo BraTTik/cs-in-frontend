@@ -10,17 +10,17 @@ import type { PixelStream } from "../l5-pixel-stream/types.ts";
 
 const JIT_RUNS = 100;
 
-const imageData = new ImageData(1024, 1024);
-const image = new Matrix2D(imageData.width, imageData.height, RGBA, imageData.data);
+const imageData = new ImageData(1920, 1080);
+const image = new Matrix2D(imageData.width, imageData.height, RGBA, imageData.data.buffer);
 
 const arraysData = new ArraysPixelStream(imageData);
 const flatData = new FlatPixelStream(imageData);
 
 
 const durationTime = (run: () => void) => {
-  const start = Date.now();
+  const start = performance.now()
   run();
-  return Date.now() - start;
+  return performance.now() - start;
 }
 
 type SaveReadResult = {
@@ -95,7 +95,7 @@ const matrixDataResult = matrixRun();
 const flatDataResult = runPixelStream(flatData);
 const arraysDataResult = runPixelStream(arraysData);
 
-const serializeRun = async (title: string, file: string, save: (imageData: ImageData, file: string) => void, read: (file: string) => ImageData): SaveReadResult => {
+const serializeRun = async (title: string, file: string, save: (imageData: ImageData, file: string) => void, read: (file: string) => ImageData): Promise<SaveReadResult> => {
 
   const saveTime = durationTime(() => save(imageData, file))
   const size = logFileSize(file);

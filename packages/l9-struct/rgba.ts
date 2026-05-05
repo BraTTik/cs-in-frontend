@@ -1,5 +1,5 @@
 import { convertHex, toHex } from "./utils.ts";
-import type { RGBAWindow } from "./types.ts"
+import type { ColorValue, RGBAWindow, HexColor, PixelValue } from "./types.ts";
 
 const Color = {
   RED: 0,
@@ -8,11 +8,15 @@ const Color = {
   ALPHA: 3
 }
 
-export class RGBA implements RGBAWindow{
+export class RGBA implements RGBAWindow {
   static byteLength: 4 = 4;
   #buffer: ArrayBufferLike | null = null;
   #offset: number = 0;
   #view: Uint8ClampedArray | null = null;
+
+  static hex = (color: string) => color as HexColor
+
+  private colorCache: Map<HexColor, PixelValue> = new Map();
 
   setBuffer(buffer: ArrayBufferLike): void {
     this.#buffer = buffer;
@@ -60,11 +64,11 @@ export class RGBA implements RGBAWindow{
   }
 
   get hex() {
-    return toHex(this);
+    return toHex(this) as HexColor;
   }
 
-  set hex(value: string) {
-    const rgba = convertHex(value);
+  set hex(value: HexColor) {
+    const rgba = this.#resolveColor(value);
     this.red = rgba[Color.RED];
     this.green = rgba[Color.GREEN];
     this.blue = rgba[Color.BLUE];
@@ -91,5 +95,32 @@ export class RGBA implements RGBAWindow{
     }
 
     this.#view![offset + this.#offset] = value;
+  }
+
+  get(offset: number = this.#offset): PixelValue {
+    this.#offset = offset;
+    return this.#view!.subarray(this.#offset, this.#offset + this.byteLength);
+  }
+
+  set(value: ColorValue, offset: number = this.#offset): void {
+    const rgba = this.#resolveColor(value);
+    this.#offset = offset;
+    this.red = rgba[Color.RED];
+    this.green = rgba[Color.GREEN];
+    this.blue = rgba[Color.BLUE];
+    this.alpha = rgba[Color.ALPHA];
+  }
+
+  #resolveColor(color: ColorValue): PixelValue {
+    if (typeof color === "string") {
+      let pixel = this.colorCache.get(color);
+      if (pixel == null) {
+        pixel = convertHex(color) as PixelValue;
+        this.colorCache.set(color, pixel);
+      }
+      return pixel;
+    }
+
+    return color;
   }
 }

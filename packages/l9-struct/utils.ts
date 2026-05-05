@@ -114,7 +114,7 @@ export const readArrayOfArraysJson = (file: string = ARRAYS_FILE) => {
   return new ImageData(new Uint8ClampedArray(pixels), data.width, data.height);
 }
 
-export const formatSize = (size: number) => (size / 1024 / 1024).toFixed(2) + " MB";
+export const formatSize = (size: number) => (size / 1024 ).toFixed(2) + " KB";
 
 export const logFileSize = (file: string) => {
   const size = formatSize(fs.statSync(file).size);

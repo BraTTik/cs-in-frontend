@@ -3,6 +3,10 @@ export type HexColor = string;
 
 export type ColorValue = PixelValue | HexColor;
 
+export type ViewCtor<T extends IView<any>> = T | (new () => T);
+export type ViewValue<T extends IView<any>> = T extends IView<infer TValue> ? TValue : never;
+
+
 export interface IView<T> {
   get byteLength(): number;
   set(value: T, offset?: number): void;

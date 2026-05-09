@@ -1,7 +1,4 @@
-import type { IView } from "./types.ts";
-
-type ViewCtor<T extends IView<any>> = T | (new () => T);
-type ViewValue<T extends IView<any>> = T extends IView<infer TValue> ? TValue : never;
+import type { IView, ViewCtor, ViewValue } from "./types.ts";
 
 const resolveWindow = <T extends IView<any>>(ctor: ViewCtor<T>): T => {
   if (typeof ctor === "function") {

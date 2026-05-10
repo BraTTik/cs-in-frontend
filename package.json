@@ -23,7 +23,9 @@
     "json:generate": "yarn workspace parser generate-json",
     "parser:dev": "yarn workspace parser dev",
     "struct:dev": "yarn workspace struct dev",
-    "struct:test": "yarn workspace struct test"
+    "struct:test": "yarn workspace struct test",
+    "dequeue:test": "yarn workspace dequeue test",
+    "dequeue:dev": "yarn workspace dequeue dev"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.28.5",

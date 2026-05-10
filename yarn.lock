@@ -3080,6 +3080,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dequeue@workspace:packages/l10-dequeue":
+  version: 0.0.0-use.local
+  resolution: "dequeue@workspace:packages/l10-dequeue"
+  languageName: unknown
+  linkType: soft
+
 "detect-libc@npm:^2.0.1, detect-libc@npm:^2.0.3":
   version: 2.1.2
   resolution: "detect-libc@npm:2.1.2"

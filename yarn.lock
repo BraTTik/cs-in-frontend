@@ -2143,6 +2143,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"allocator@workspace:packages/l11-allocator":
+  version: 0.0.0-use.local
+  resolution: "allocator@workspace:packages/l11-allocator"
+  languageName: unknown
+  linkType: soft
+
 "ansi-escapes@npm:^4.3.2":
   version: 4.3.2
   resolution: "ansi-escapes@npm:4.3.2"

@@ -25,7 +25,8 @@
     "struct:dev": "yarn workspace struct dev",
     "struct:test": "yarn workspace struct test",
     "dequeue:test": "yarn workspace dequeue test",
-    "dequeue:dev": "yarn workspace dequeue dev"
+    "dequeue:dev": "yarn workspace dequeue dev",
+    "allocator:test": "yarn workspace allocator test"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.28.5",

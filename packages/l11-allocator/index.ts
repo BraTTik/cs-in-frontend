@@ -2,7 +2,6 @@ import { Memory } from "./memory/memory.ts";
 
 const mem = new Memory(100 * 1024, { stack: 10 * 1024 });
 
-
 const buffer1 = new Uint8Array(new ArrayBuffer(16));
 buffer1[1] = 42;
 

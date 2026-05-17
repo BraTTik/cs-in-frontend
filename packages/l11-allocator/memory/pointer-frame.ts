@@ -9,8 +9,16 @@ export class PointerFrame {
     return this.#view[PointerFrame.ADDRESS];
   }
 
+  set address(address: number) {
+    this.#view[PointerFrame.ADDRESS] = address;
+  }
+
   get byteLength() {
     return this.#view[PointerFrame.BYTE_LENGTH];
+  }
+
+  set byteLength(byteLength: number) {
+    this.#view[PointerFrame.BYTE_LENGTH] = byteLength;
   }
 
   static read(buffer: ArrayBuffer, offset: number) {
@@ -21,6 +29,8 @@ export class PointerFrame {
     const view = new Uint32Array(buffer, offset, 2);
     view[PointerFrame.ADDRESS] = address;
     view[PointerFrame.BYTE_LENGTH] = byteLength;
+
+    return new PointerFrame(view);
   }
 
   protected constructor(view: Uint32Array) {

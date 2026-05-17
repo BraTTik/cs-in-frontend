@@ -16,8 +16,9 @@ export class Stack {
       throw new RangeError("Stack overflow");
     }
 
-    PointerFrame.write(this.#buffer, this.#length, address, byteLength);
+    const frame = PointerFrame.write(this.#buffer, this.#length, address, byteLength);
     this.#length += PointerFrame.byteLength;
+    return frame;
   }
 
   pop() {

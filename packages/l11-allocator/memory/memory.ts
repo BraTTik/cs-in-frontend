@@ -61,6 +61,10 @@ class Pointer {
     }
     return this.valueOf();
   }
+
+  [Symbol.dispose]() {
+    this.free();
+  }
 }
 
 
@@ -88,7 +92,7 @@ export class Memory {
     this.__write(buffer, address);
 
     return new Pointer(address, buffer.byteLength, this.#buffer, this, () => {
-      throw new Error("Stack pointer cannot be freed use pop instead");
+      this.pop();
     }, frame)
   }
 

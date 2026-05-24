@@ -27,7 +27,9 @@
     "dequeue:test": "yarn workspace dequeue test",
     "dequeue:dev": "yarn workspace dequeue dev",
     "allocator:test": "yarn workspace allocator test",
-    "allocator:dev": "yarn workspace allocator dev"
+    "allocator:dev": "yarn workspace allocator dev",
+    "hash-table:dev": "yarn workspace hash-table dev",
+    "hash-table:test": "yarn workspace hash-table test"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.28.5",

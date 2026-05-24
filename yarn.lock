@@ -2146,6 +2146,8 @@ __metadata:
 "allocator@workspace:packages/l11-allocator":
   version: 0.0.0-use.local
   resolution: "allocator@workspace:packages/l11-allocator"
+  dependencies:
+    utils: "workspace:*"
   languageName: unknown
   linkType: soft
 
@@ -4072,6 +4074,14 @@ __metadata:
   checksum: 10c0/a8b166462192bafe3d9b6e420a1d581d93dd867adb61be223a17a8d6dad147aa77a8be32c961bb2f27b3ef893cae8d36f564ab651f5e9b7938ae86f74027c48c
   languageName: node
   linkType: hard
+
+"hash-table@workspace:packages/l13-hash-table":
+  version: 0.0.0-use.local
+  resolution: "hash-table@workspace:packages/l13-hash-table"
+  dependencies:
+    utils: "workspace:*"
+  languageName: unknown
+  linkType: soft
 
 "hasown@npm:^2.0.2":
   version: 2.0.2

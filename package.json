@@ -29,7 +29,9 @@
     "allocator:test": "yarn workspace allocator test",
     "allocator:dev": "yarn workspace allocator dev",
     "hash-table:dev": "yarn workspace hash-table dev",
-    "hash-table:test": "yarn workspace hash-table test"
+    "hash-table:test": "yarn workspace hash-table test",
+    "binary-search:test": "yarn workspace binary-search test",
+    "binary-search:dev": "yarn workspace binary-search dev"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.28.5",

@@ -31,7 +31,8 @@
     "hash-table:dev": "yarn workspace hash-table dev",
     "hash-table:test": "yarn workspace hash-table test",
     "binary-search:test": "yarn workspace binary-search test",
-    "binary-search:dev": "yarn workspace binary-search dev"
+    "binary-search:dev": "yarn workspace binary-search dev",
+    "graph:dev": "yarn workspace graph dev"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.28.5",

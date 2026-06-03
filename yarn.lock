@@ -4017,6 +4017,14 @@ __metadata:
   languageName: node
   linkType: hard
 
+"graph@workspace:packages/l15-graph":
+  version: 0.0.0-use.local
+  resolution: "graph@workspace:packages/l15-graph"
+  dependencies:
+    utils: "workspace:*"
+  languageName: unknown
+  linkType: soft
+
 "handlebars@npm:^4.7.9":
   version: 4.7.9
   resolution: "handlebars@npm:4.7.9"

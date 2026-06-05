@@ -36,3 +36,7 @@ matrix.forEach((value, row, col) => {
 rows.unshift(rowIndex);
 console.table(rows.toString());
 console.log("total: ", i)
+
+graph.traverse(1, (node, depth, weight) => {
+  console.log(`Узел: ${node}, глубина: ${depth}, вес ребра: ${weight}`);
+})

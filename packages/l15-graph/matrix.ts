@@ -17,6 +17,14 @@ export class Matrix<V extends InstanceType<DataType>, C extends (new (length: nu
   readonly #width: number;
   readonly #height: number;
 
+  get width(): number {
+    return this.#width;
+  }
+
+  get height(): number {
+    return this.#height;
+  }
+
   constructor(View: C & DataType, width: number, height: number) {
     this.#width = width;
     this.#height = height;

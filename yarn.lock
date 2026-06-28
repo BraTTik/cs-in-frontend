@@ -2837,6 +2837,14 @@ __metadata:
   languageName: node
   linkType: hard
 
+"binary-heap@workspace:packages/l17-binary-heap":
+  version: 0.0.0-use.local
+  resolution: "binary-heap@workspace:packages/l17-binary-heap"
+  dependencies:
+    utils: "workspace:*"
+  languageName: unknown
+  linkType: soft
+
 "binary-search@workspace:packages/l14-binary-search":
   version: 0.0.0-use.local
   resolution: "binary-search@workspace:packages/l14-binary-search"

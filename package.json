@@ -34,7 +34,8 @@
     "binary-search:dev": "yarn workspace binary-search dev",
     "graph:dev": "yarn workspace graph dev",
     "binary-tree:dev": "yarn workspace binary-tree dev",
-    "binary-tree:test": "yarn workspace binary-tree test"
+    "binary-tree:test": "yarn workspace binary-tree test",
+    "binary-heap:dev": "yarn workspace binary-heap dev"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.28.5",

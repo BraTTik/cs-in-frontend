@@ -6717,6 +6717,14 @@ __metadata:
   languageName: node
   linkType: hard
 
+"regex@workspace:packages/l20-regex":
+  version: 0.0.0-use.local
+  resolution: "regex@workspace:packages/l20-regex"
+  dependencies:
+    utils: "workspace:*"
+  languageName: unknown
+  linkType: soft
+
 "regexp.prototype.flags@npm:^1.5.3, regexp.prototype.flags@npm:^1.5.4":
   version: 1.5.4
   resolution: "regexp.prototype.flags@npm:1.5.4"

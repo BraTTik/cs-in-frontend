@@ -6717,6 +6717,14 @@ __metadata:
   languageName: node
   linkType: hard
 
+"regex-advanced@workspace:packages/l21-regex-advanced":
+  version: 0.0.0-use.local
+  resolution: "regex-advanced@workspace:packages/l21-regex-advanced"
+  dependencies:
+    utils: "workspace:*"
+  languageName: unknown
+  linkType: soft
+
 "regex@workspace:packages/l20-regex":
   version: 0.0.0-use.local
   resolution: "regex@workspace:packages/l20-regex"

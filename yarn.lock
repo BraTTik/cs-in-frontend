@@ -2861,6 +2861,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"bor@workspace:packages/l19-bor":
+  version: 0.0.0-use.local
+  resolution: "bor@workspace:packages/l19-bor"
+  dependencies:
+    utils: "workspace:*"
+  languageName: unknown
+  linkType: soft
+
 "brace-expansion@npm:^1.1.7":
   version: 1.1.12
   resolution: "brace-expansion@npm:1.1.12"
@@ -7366,6 +7374,14 @@ __metadata:
   checksum: 10c0/dfbe201ae09ac6053d163578778c53aa860a784147ecf95705de0cd23f42c851e1be7889241495e95c37cabb058edb1052f141387bef68f705afc8f9dd358509
   languageName: node
   linkType: hard
+
+"symbols@workspace:packages/l18-symbols":
+  version: 0.0.0-use.local
+  resolution: "symbols@workspace:packages/l18-symbols"
+  dependencies:
+    utils: "workspace:*"
+  languageName: unknown
+  linkType: soft
 
 "synckit@npm:^0.11.8":
   version: 0.11.12

@@ -1,8 +1,3 @@
-const testText = `
-Какой-то текст (10 + (15 - 24)) ** 2
-Еще какой то текст 2 * 10
-`
-
 const loopReplace = (regex: RegExp, str: string, replacer: (substring: string, ...args: any[]) => string) => {
   let prev: string;
 

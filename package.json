@@ -40,7 +40,8 @@
     "bor:dev": "yarn workspace bor dev",
     "regex:dev": "yarn workspace regex dev",
     "regex-advanced:dev": "yarn workspace regex-advanced dev",
-    "iterators:dev": "yarn workspace iterators dev"
+    "iterators:dev": "yarn workspace iterators dev",
+    "iterators:test": "yarn workspace iterators test"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.28.5",

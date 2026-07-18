@@ -15,5 +15,9 @@
   "dependencies": {
     "utils": "workspace:*"
   },
+  "devDependencies": {
+    "jest-environment-jsdom": "^30.3.0",
+    "jsdom": "^29.1.1"
+  },
   "private": true
 }

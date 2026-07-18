@@ -5175,6 +5175,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "iterators@workspace:packages/l23-iterators"
   dependencies:
+    jest-environment-jsdom: "npm:^30.3.0"
+    jsdom: "npm:^29.1.1"
     utils: "workspace:*"
   languageName: unknown
   linkType: soft

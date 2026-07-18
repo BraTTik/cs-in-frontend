@@ -4998,6 +4998,14 @@ __metadata:
   languageName: node
   linkType: hard
 
+"iterators@workspace:packages/l23-iterators":
+  version: 0.0.0-use.local
+  resolution: "iterators@workspace:packages/l23-iterators"
+  dependencies:
+    utils: "workspace:*"
+  languageName: unknown
+  linkType: soft
+
 "jackspeak@npm:^3.1.2":
   version: 3.4.3
   resolution: "jackspeak@npm:3.4.3"

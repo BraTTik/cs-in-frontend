@@ -41,7 +41,8 @@
     "regex:dev": "yarn workspace regex dev",
     "regex-advanced:dev": "yarn workspace regex-advanced dev",
     "iterators:dev": "yarn workspace iterators dev",
-    "iterators:test": "yarn workspace iterators test"
+    "iterators:test": "yarn workspace iterators test",
+    "iterators:vite": "yarn workspace iterators vite"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.28.5",
@@ -58,6 +59,7 @@
     "ts-node": "^10.9.2",
     "tsx": "^4.22.4",
     "typescript": "^6.0.2",
-    "typescript-eslint": "^8.57.2"
+    "typescript-eslint": "^8.57.2",
+    "vite": "^8.1.5"
   }
 }

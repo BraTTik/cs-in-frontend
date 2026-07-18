@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "test": "jest",
-    "dev": "npx tsx --watch index.ts"
+    "dev": "npx tsx --watch index.ts",
+    "vite": "vite"
   },
   "repository": {
     "type": "git",

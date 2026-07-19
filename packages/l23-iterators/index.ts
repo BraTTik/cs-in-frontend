@@ -2,6 +2,7 @@ import { random } from "./random-int.ts";
 import { Range } from "./range.ts";
 import { take } from "./take.ts";
 import { filter } from "./filter.ts";
+import { enumerate } from "./enumerate.ts";
 
 const randomInt = random(0, 100);
 
@@ -19,4 +20,4 @@ const randomInt = random(0, 100);
 // console.log(Array.from(intRange.reverse()));
 
 
-console.log([...take(filter(randomInt, (n) => n > 31), 15)]);
+console.log([...take(enumerate(randomInt), 15)]);

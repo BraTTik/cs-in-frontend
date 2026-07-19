@@ -3,6 +3,7 @@ import { Range } from "./range.ts";
 import { take } from "./take.ts";
 import { filter } from "./filter.ts";
 import { enumerate } from "./enumerate.ts";
+import { seq } from "./seq.ts";
 
 const randomInt = random(0, 100);
 
@@ -20,4 +21,4 @@ const randomInt = random(0, 100);
 // console.log(Array.from(intRange.reverse()));
 
 
-console.log([...take(enumerate(randomInt), 15)]);
+console.log([...seq([[1, 2], new Set([3, 4]), "bla"])]);

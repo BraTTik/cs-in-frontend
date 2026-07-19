@@ -1,5 +1,7 @@
 import { random } from "./random-int.ts";
 import { Range } from "./range.ts";
+import { take } from "./take.ts";
+import { filter } from "./filter.ts";
 
 const randomInt = random(0, 100);
 
@@ -8,10 +10,13 @@ const randomInt = random(0, 100);
 // }
 //
 
-const range = new Range("a", "f");
-const intRange = new Range(-5, 1);
+// const range = new Range("a", "f");
+// const intRange = new Range(-5, 1);
+//
+// console.log(Array.from(range));
+// console.log(Array.from(range.reverse()));
+// console.log(Array.from(intRange));
+// console.log(Array.from(intRange.reverse()));
 
-console.log(Array.from(range));
-console.log(Array.from(range.reverse()));
-console.log(Array.from(intRange));
-console.log(Array.from(intRange.reverse()));
+
+console.log([...take(filter(randomInt, (n) => n > 31), 15)]);

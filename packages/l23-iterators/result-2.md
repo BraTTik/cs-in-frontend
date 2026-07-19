@@ -54,13 +54,16 @@ export function filter<T>(iterable: Iterable<T>, callback: (item: T) => boolean)
 
   return Iterator.from({
     next: () => {
-      const result = iter.next();
-      const value = result.value;
-      if (result.done || callback(value!)) {
-        return result;
-      }
+      let result: IteratorResult<T> =  { done: true, value: undefined }
 
-      return { done: true, value: undefined };
+      do {
+        result = iter.next();
+        if (!result.done && callback(result.value)) {
+          return result;
+        }
+      } while (!result.done);
+
+      return result;
     }
   })
 }

@@ -43,7 +43,8 @@
     "regex-advanced-2:dev": "yarn workspace regex-advanced-2 dev",
     "iterators:dev": "yarn workspace iterators dev",
     "iterators:test": "yarn workspace iterators test",
-    "iterators:vite": "yarn workspace iterators vite"
+    "iterators:vite": "yarn workspace iterators vite",
+    "generators:dev": "yarn workspace generators dev"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.28.5",
